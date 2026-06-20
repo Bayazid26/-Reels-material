@@ -1,0 +1,152 @@
+:root{
+  --bg-deep:#04060f;
+  --bg-mid:#0a1330;
+  --ink:#eef2ff;
+  --ink-dim:rgba(238,242,255,0.55);
+  --accent:#7dd3fc;
+  --accent-soft:rgba(125,211,252,0.35);
+}
+
+*{box-sizing:border-box;}
+
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: radial-gradient(circle at 50% 30%, var(--bg-mid) 0%, var(--bg-deep) 70%);
+  font-family:'Inter', Arial, sans-serif;
+  color:var(--ink);
+}
+
+.app{
+  width:460px;
+  padding:28px 0 36px;
+  text-align:center;
+}
+
+/* ---- info ---- */
+.info h2{
+  margin:0 0 14px;
+  font-family:'Space Grotesk', sans-serif;
+  font-size:30px;
+  font-weight:700;
+  letter-spacing:0.5px;
+}
+
+.stats{
+  display:flex;
+  justify-content:center;
+  gap:36px;
+}
+
+.stat{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+
+.stat span{
+  font-family:'Space Grotesk', sans-serif;
+  font-size:17px;
+  font-weight:500;
+}
+
+.stat label{
+  font-size:10px;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+  color:var(--ink-dim);
+}
+
+/* ---- dial ---- */
+.dial{
+  position:relative;
+  width:440px;
+  height:440px;
+  margin:34px auto 0;
+}
+
+.planet-box{
+  position:absolute;
+  top:50%; left:50%;
+  width:330px;
+  height:330px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  overflow:hidden;
+
+  box-shadow:
+    0 0 80px var(--accent-soft),
+    inset 0 0 60px rgba(0,0,0,0.6);
+}
+
+#planet{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  animation:spin 90s linear infinite;
+}
+
+.light{
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  background: radial-gradient(circle at 32% 28%, rgba(255,255,255,0.28), transparent 60%);
+}
+
+.planet-box::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  background: radial-gradient(circle, transparent 68%, rgba(0,0,0,0.75));
+}
+
+@keyframes spin{ to{ transform:rotate(360deg); } }
+
+/* tick mark — shows the "loaded" slot at the top of the dial */
+.tick{
+  position:absolute;
+  top:6px; left:50%;
+  width:2px; height:14px;
+  background:var(--accent);
+  transform:translateX(-50%);
+  border-radius:2px;
+  box-shadow:0 0 8px var(--accent);
+}
+
+svg#orbit{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  overflow:visible;
+}
+
+.orbit-ring{
+  stroke:rgba(255,255,255,0.08);
+  stroke-width:1;
+}
+
+.arc-label{
+  font-family:'Inter', sans-serif;
+  font-size:13px;
+  font-weight:500;
+  letter-spacing:0.3px;
+  fill:var(--ink-dim);
+  cursor:pointer;
+  dominant-baseline:middle;
+  transition:opacity .2s ease, fill .2s ease;
+}
+
+.arc-label:hover{
+  fill:#ffffff;
+  opacity:1;
+}
+
+.arc-label.active{
+  fill:var(--accent);
+  font-weight:600;
+}
